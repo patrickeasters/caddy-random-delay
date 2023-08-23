@@ -1,0 +1,13 @@
+{
+	order random_delay before reverse_proxy
+}
+
+http://localhost:8000 {
+    random_delay 0.5 10s
+	reverse_proxy https://icanhazip.com {
+		header_up Host {upstream_hostport}
+	}
+	log {
+		format console
+	}
+}
